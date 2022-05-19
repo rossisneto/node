@@ -5,10 +5,10 @@ const porta = 5000;
 
 
 http.createServer((req,res) => {
-    if(req.url === '/'){
+    if(req.url == '/'){
         //return res.end('<h1>Home</h1>');
         fs.readFile(
-            path.join(__dirname, 'public','index.html'),(err,conteudo)=>{
+            path.join(__dirname,'public','index.html'),(err,conteudo)=>{
                 if(err) throw err;
                 res.end(conteudo);
             });
@@ -22,4 +22,20 @@ http.createServer((req,res) => {
                 res.end(conteudo);
             });
     }
-}).listen(porta, ()=>console.log('Servidor iniciado na porta '+porta));
+    if(req.url === '/produtos'){
+        
+        fs.readFile(
+            path.join(__dirname, 'public','produtos.html'),(err,conteudo)=>{
+                if(err) throw err;
+                res.end(conteudo);
+            });
+    }
+    if(req.url === '/servicos'){
+        
+        fs.readFile(
+            path.join(__dirname, 'public','servicos.html'),(err,conteudo)=>{
+                if(err) throw err;
+                res.end(conteudo);
+            });
+    }
+}).listen(process.env.PORT || porta, ()=>console.log('Servidor iniciado na porta '+porta));
